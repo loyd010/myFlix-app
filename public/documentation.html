@@ -3,9 +3,111 @@
   <head>
     <meta charset="utf-8">
     <title>Documentation</title>
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
   </head>
   <body>
     <h1>Documentation Page</h1>
     <p>This API will be used to retrieve information about movies, including movie details, directors, genres, etc., from a database when queried.  The API will be accessed via HTTP methods like GET and POST.</p>
+    <p>The table below shows the various requests that may be made to this app, as well as other details about the requests.</p>
+
+    <table>
+      <tr>
+        <td>Description</td>
+        <td>Endpoint URL</td>
+        <td>HTTP Method</td>
+        <td>Query Paramaters</td>
+        <td>Request Body Data Format</td>
+        <td>Response Body Data Format</td>
+      </tr>
+      <tr>
+        <td>Return a list of all movies to the user</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>None</td>
+        <td>A JSON object holding data about all of the movies</td>
+      </tr>
+      <tr>
+        <td>Return data about a single movie by title</td>
+        <td>/movies/[Title]</td>
+        <td>GET</td>
+        <td>Movie title</td>
+        <td>None</td>
+        <td>A JSON object holding data about a single movie, including title, director, and genre</td>
+      </tr>
+      <tr>
+        <td>Return data about a genre by name</td>
+        <td>/movies/[Genre]/genreName</td>
+        <td>GET</td>
+        <td>Name of the genre</td>
+        <td>None</td>
+        <td>JSON object holding data about a single genre, including description</td>
+      </tr>
+      <tr>
+        <td>Return data about a director by name</td>
+        <td>/movies/[Director]/directorName</td>
+        <td>GET</td>
+        <td>Name of the director</td>
+        <td>None</td>
+        <td>JSON object holding data about a single director, including bio, birth year, death year</td>
+      </tr>
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>none</td>
+        <td>JSON object holding data about the user to add, structured like: {username: 'Tara1234', email: 'loyd@gmail.com'}</td>
+        <td>JSON object holding data about the user that was added, including an ID: {id: 1, username: 'Tara1234', email: 'loyd@gmail.com'}</td>
+      </tr>
+      <tr>
+        <td>Allow users to update their user information (username)</td>
+        <td>/users/[Username]</td>
+        <td>PUT</td>
+        <td>Username and credentials</td>
+        <td>None</td>
+        <td>A text message indicating that the username was updated</td>
+      </tr>
+      <tr>
+        <td>Allow users to add a movie to their list of favorites</td>
+        <td>/users/[Username]/favorites</td>
+        <td>POST</td>
+        <td>None</td>
+        <td>JSON object holding data about the movie to add, structured like: {title: 'Shrek', director: 'Vicky Jenson', release year: 2001}</td>
+        <td>JSON object holding data about the movie that was added, including an ID: {id: 20, title: 'Shrek', director: 'Vicky Jenson', release year: 2001}</td>
+      </tr>
+      <tr>
+        <td>Allow users to remove movies from their list of favorites</td>
+        <td>/users/[Usernames]/removals</td>
+        <td>DELETE</td>
+        <td>Movie title</td>
+        <td>None</td>
+        <td>A text message indicating whether the movie was successfully removed</td>
+      </tr>
+      <tr>
+        <td>Allow existing users to deregister</td>
+        <td>/users/[Usernames]/registration</td>
+        <td>PUT</td>
+        <td>Username and credentials</td>
+        <td>None</td>
+        <td>A text message indicating whether the user successfully deregistered</td>
+      </tr>
+    </table>
+
   </body>
 </html>
