@@ -35,74 +35,83 @@
         <td>Request Body Data Format</td>
         <td>Response Body Data Format</td>
       </tr>
+
       <tr>
         <td>Return a list of all movies to the user</td>
         <td>/movies</td>
         <td>GET</td>
         <td>None</td>
         <td>None</td>
-        <td>A JSON object holding data about all of the movies</td>
+        <td>A JSON object holding data about all of the movies, ex. { Title: "", Description: "", Genre: {Name: "", Description: ""}, Director: {Name: "", Bio: ""}}</td>
       </tr>
+
       <tr>
         <td>Return data about a single movie by title</td>
-        <td>/movies/[Title]</td>
+        <td>/movies/:title</td>
         <td>GET</td>
         <td>Movie title</td>
         <td>None</td>
-        <td>A JSON object holding data about a single movie, including title, director, and genre</td>
+        <td>A JSON object holding data about a single movie, ex. { Title: "", Description: "", Genre: {Name: "", Description: ""}, Director: {Name: "", Bio: ""}}</td>
       </tr>
+
       <tr>
         <td>Return data about a genre by name</td>
-        <td>/movies/[Genre]/genreName</td>
+        <td>/movies/genre/:genreName</td>
         <td>GET</td>
         <td>Name of the genre</td>
         <td>None</td>
-        <td>JSON object holding data about a single genre, including description</td>
+        <td>JSON object holding data about a single genre, ex. { Name: "", Description: "" }</td>
       </tr>
+
       <tr>
         <td>Return data about a director by name</td>
-        <td>/movies/[Director]/directorName</td>
+        <td>/movies/director/:directorName</td>
         <td>GET</td>
         <td>Name of the director</td>
         <td>None</td>
-        <td>JSON object holding data about a single director, including bio, birth year, death year</td>
+        <td>JSON object holding data about a single director, ex. { Name: "", Bio: "", Birth year: "", Death year: "" }</td>
       </tr>
+
       <tr>
         <td>Allow new users to register</td>
         <td>/users</td>
         <td>POST</td>
         <td>none</td>
-        <td>JSON object holding data about the user to add, structured like: {username: 'Tara1234', email: 'loyd@gmail.com'}</td>
-        <td>JSON object holding data about the user that was added, including an ID: {id: 1, username: 'Tara1234', email: 'loyd@gmail.com'}</td>
+        <td>JSON object holding data about the user to add, ex. {username: "Tara1234", password: "1234", email: "loyd@gmail.com", Birthday: "", FavoriteMovies: [] }</td>
+        <td>JSON object holding data about the user that was added, including an ID: {id: 1, username: "Tara1234", password: "1234", email: "loyd@gmail.com", Birthday: "", FavoriteMovies: [] }</td>
       </tr>
+
       <tr>
         <td>Allow users to update their user information (username)</td>
-        <td>/users/[Username]</td>
+        <td>/users/:Username</td>
         <td>PUT</td>
         <td>Username and credentials</td>
-        <td>None</td>
-        <td>A text message indicating that the username was updated</td>
+        <td>JSON object with data to be updated, ex. {username: "23ryan", password: "9876%$#"}</td>
+        <td>JSON object showing updated user data, ex. {id: 2, username: "23ryan", password: "9876%$#", email: "ry23@gmail.com", Birthday: "", FavoriteMovies: [] }</td>
       </tr>
+
       <tr>
         <td>Allow users to add a movie to their list of favorites</td>
-        <td>/users/[Username]/favoriteMovies</td>
+        <td>/users/:Username/movies/:MovieID</td>
         <td>POST</td>
+        <td>Movie ID</td>
         <td>None</td>
-        <td>JSON object holding data about the movie to add, structured like: {title: 'Shrek', director: 'Vicky Jenson', release year: 2001}</td>
-        <td>JSON object holding data about the movie that was added, including an ID: {id: 20, title: 'Shrek', director: 'Vicky Jenson', release year: 2001}</td>
+        <td>A text message indicating that the movie was successfully added</td>
       </tr>
+
       <tr>
         <td>Allow users to remove movies from their list of favorites</td>
-        <td>/users/[Usernames]/removals</td>
+        <td>/users/:Username/movies/:MovieID</td>
         <td>DELETE</td>
-        <td>Movie title</td>
+        <td>Movie ID</td>
         <td>None</td>
-        <td>A text message indicating whether the movie was successfully removed</td>
+        <td>A text message indicating that the movie was successfully removed</td>
       </tr>
+
       <tr>
         <td>Allow existing users to deregister</td>
-        <td>/users/[Usernames]/registration</td>
-        <td>PUT</td>
+        <td>/users/:Usernames</td>
+        <td>DELETE</td>
         <td>Username and credentials</td>
         <td>None</td>
         <td>A text message indicating whether the user successfully deregistered</td>
