@@ -92,11 +92,23 @@ app.get('/movies/:Title', (req, res) => {
   });
 });
 
-//Get information about genre - NEED TO REVISIT
-app.get('/movies/Genre.Name', (req, res) => {
-  Movies.findOne({ 'Genre.Name': req.params.Genre.Name })
+//Get information about genre
+app.get('/genre/:Name', (req, res) => {
+  Movies.findOne({ 'Genre.Name': req.params.Name })
   .then((movies) => {
-    res.json(movies);
+    res.json(movies.Genre.Description);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
+});
+
+//Get information about director
+app.get('/director/:Name', (req, res) => {
+  Movies.findOne({ 'Director.Name': req.params.Name })
+  .then((movies) => {
+    res.json(movies.Director);
   })
   .catch((err) => {
     console.error(err);
@@ -140,9 +152,24 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
   });
 });
 
+//Remove a movie from a user's list of favorites
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username}, {
+    $pull: { FavoriteMovies: req.params.MovieID}
+  }, { new: true },
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+});
+
 //Delete a user by username
 app.delete('/users/:Username', (req, res) => {
-  User.findOneAndRemove({ Username: req.params.Username })
+  Users.findOneAndRemove({ Username: req.params.Username })
   .then((user) => {
     if (!user) {
       res.status(400).send(req.params.Username = ' was not found');
