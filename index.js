@@ -22,6 +22,9 @@ app.use(bodyParser.urlencoded({
 const { check, validationResult } = require('express-validator');
 
 const cors = require('cors');
+app.use(cors());
+
+/*To restrict access to certain domains:
 
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'https://herokuapp.com', 'https://www.heroku.com'];
 
@@ -34,7 +37,7 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}));
+}));*/
 
 let auth = require('./auth')(app);
 
