@@ -95,19 +95,7 @@ app.get('/users', passport.authenticate('jwt', { session: false}), (req, res) =>
   });
 });
 
-//Get all movies - TO BE REMOVED
-app.get('/movies', function (req, res) {
-  Movies.find()
-  .then(function (movies) {
-    res.status(201).json(movies);
-  })
-  .catch(function (error) {
-    console.error(error);
-    res.status(500).send("Error: " + error);
-  });
-});
-
-/*Get all movies - TEMPORARILY COMMENTING OUT
+//Get all movies 
 app.get('/movies', passport.authenticate('jwt', { session: false}), (req, res) => {
   Movies.find()
   .then((movies) => {
@@ -117,7 +105,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false}), (req, res) =
     console.error(err);
     res.status(500).send('Error: ' + err);
   });
-});*/
+});
 
 //Get a user by username
 app.get('/users/:Username', passport.authenticate('jwt', { session: false}), (req, res) => {
